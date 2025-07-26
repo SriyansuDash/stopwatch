@@ -1,0 +1,72 @@
+body {
+
+    background-image:
+        radial-gradient(circle at 10% 40%, rgb(90, 2, 177), transparent 50%),
+        radial-gradient(circle at 60% 90%, rgb(3, 116, 192), transparent 50%);
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    background-image: linear-gradient(to right, rgba(116, 197, 252, 0.473), rgba(159, 71, 248, 0.384));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 2rem;
+    text-align: center;
+    margin: 10% auto;
+    padding: 100px;
+}
+
+.time-display {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 5.5rem;
+    font-weight: 700;
+    color: #f0f7fd;
+    text-shadow: 0 0 10px rgba(24, 73, 235, 0.7), 0 0 20px rgba(54, 64, 83, 0.7);
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+}
+.text-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    top: -20px;
+    left: 10px;
+    font-size: x-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons .btn {
+    border: 0px;
+    padding: 2pc;
+    font-size: 30px;
+    border-radius: 20%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.buttons .start-button {
+    background-color: #4CAF50;
+    color: cornsilk;
+    box-shadow: 0 0 10px rgba(24, 235, 59, 0.7), 0 0 20px rgba(54, 64, 83, 0.7);
+}
+
+.buttons .stop-button {
+    background-color: #f44336;
+    color: cornsilk;
+    box-shadow: 0 0 10px rgba(235, 24, 24, 0.7), 0 0 20px rgba(54, 64, 83, 0.7);
+}
+
+.buttons .reset-button {
+    background-color: #2196F3;
+    color: cornsilk;
+    box-shadow: 0 0 10px rgba(18, 93, 255, 0.7), 0 0 20px rgba(54, 64, 83, 0.7);
+}
