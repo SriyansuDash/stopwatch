@@ -1,50 +1,80 @@
-let startButton = document.querySelector('.start-button');
-let stopButton = document.querySelector('.stop-button');
-let resetButton = document.querySelector('.reset-button');
+const startButton = document.querySelector('.start-button');
+const stopButton = document.querySelector('.stop-button');
+const resetButton = document.querySelector('.reset-button');
+const lapButton = document.querySelector('.lap-button');
 
-let hours = document.querySelector('.hours');
-let minutes = document.querySelector('.minutes');
-let seconds = document.querySelector('.seconds');
+const hoursDisplay = document.querySelector('.hours');
+const minutesDisplay = document.querySelector('.minutes');
+const secondsDisplay = document.querySelector('.seconds');
 
-let timer = [0,0,0];
-let timerId = 0;
+const lapList = document.querySelector('.lap-list');
 
-function startTimer(){
+let timer = {
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    intervalId: null,
+    isRunning: false
+};
 
-    if (timerId !== 0) {
-        return;
-    }
-    timerId = setInterval(() => {
-        timer[2]++;
-        if(timer[2] == 60){
-            timer[1]++;
-            timer[2] = 0 ;
+const formatTime = (time) => time.toString().padStart(2, "0");
+
+const updateDisplay = () => {
+    hoursDisplay.textContent = formatTime(timer.hours);
+    minutesDisplay.textContent = formatTime(timer.minutes);
+    secondsDisplay.textContent = formatTime(timer.seconds);
+};
+
+const startTimer = () => {
+    if (timer.isRunning) return;
+    
+    timer.isRunning = true;
+    timer.intervalId = setInterval(() => {
+        timer.seconds++;
+        
+        if (timer.seconds === 60) {
+            timer.minutes++;
+            timer.seconds = 0;
         }
-        if(timer[1] == 60){
-            timer[0]++;
-            timer[1] = 0 ;
+        
+        if (timer.minutes === 60) {
+            timer.hours++;
+            timer.minutes = 0;
         }
-        displayTime();
+        
+        updateDisplay();
     }, 1000);
-}
+};
 
-function stopTimer(){
-    clearInterval(timerId);
-    timerId = 0;
-}
+const stopTimer = () => {
+    if (!timer.isRunning) return;
+    
+    clearInterval(timer.intervalId);
+    timer.isRunning = false;
+    timer.intervalId = null;
+};
 
-function resetTimer(){
+
+const resetTimer = () => {
     stopTimer();
-    timer = [0,0,0];
-    displayTime();
-}
+    timer.hours = 0;
+    timer.minutes = 0;
+    timer.seconds = 0;
+    updateDisplay();
+    lapList.innerHTML = '';
+};
 
-function displayTime() {
-    hours.innerText = timer[0].toString().padStart(2,"0");
-    minutes.innerText = timer[1].toString().padStart(2,"0");
-    seconds.innerText = timer[2].toString().padStart(2,"0");
-}
+const recordLap = () => {
+    if (!timer.isRunning) return;
+    
+    const lapTime = `${formatTime(timer.hours)}:${formatTime(timer.minutes)}:${formatTime(timer.seconds)}`;
+    const lapItem = document.createElement('li');
+    lapItem.textContent = `Lap ${lapList.children.length + 1}: ${lapTime}`;
+    lapList.prepend(lapItem);
+};
 
 startButton.addEventListener('click', startTimer);
 stopButton.addEventListener('click', stopTimer);
 resetButton.addEventListener('click', resetTimer);
+lapButton.addEventListener('click', recordLap);
+updateDisplay();
